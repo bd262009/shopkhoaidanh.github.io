@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <!-- Thiết lập bảng mã ký tự và khung nhìn cho thiết bị di động -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khoai Môn Vàng - Đặc Sản Tây Nguyên</title>
+    
+    <!-- Nhập font chữ từ Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Định dạng tổng thể với tông màu tím khoai môn tự nhiên */
+        body {
+            background-color: #f9f5f0;
+            color: #4a3b32;
+            font-family: 'Quicksand', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+            background-image: linear-gradient(135deg, #f3e5d8 0%, #ede0d4 100%);
+        }
+
+        /* Container chính căn giữa */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Thanh điều hướng trên cùng */
+        nav {
+            background: linear-gradient(90deg, #6b4c3b, #8b5e4e);
+            color: #fff;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            color: #ffd4a8;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+        nav a:hover {
+            background: rgba(255,255,255,0.2);
+            color: #ffd4a8;
+        }
+
+        /* Phần hero banner chính */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="%2391663b"/><circle cx="35" cy="40" r="10" fill="%237a4f2e"/><circle cx="65" cy="40" r="10" fill="%237a4f2e"/><circle cx="50" cy="60" r="15" fill="%23c49a6c"/></svg>');
+            background-size: 200px;
+            color: white;
+            text-align: center;
+            padding: 120px 0;
+            margin-bottom: 40px;
+        }
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            margin: 0;
+            text-shadow: 3px 3px 0 rgba(0,0,0,0.5);
+            letter-spacing: 3px;
+        }
+        .hero p {
+            font-size: 1.5rem;
+            margin-top: 10px;
+            font-weight: 400;
+        }
+        .hero .cta-btn {
+            display: inline-block;
+            margin-top: 30px;
+            background: #c49a6c;
+            color: #fff;
+            padding: 18px 45px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px;
+            border: 3px solid #fff;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .hero .cta-btn:hover {
+            background: #8b5e4e;
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+
+        /* Tiêu đề các phần */
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #5c3d2e;
+            text-align: center;
+            position: relative;
+            margin: 60px 0 40px;
+        }
+        h2::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: #c49a6c;
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+
+        /* Lưới sản phẩm */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        .product-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: 0.4s;
+            border: 2px solid #e8d5c4;
+        }
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            border-color: #c49a6c;
+        }
+        .product-img {
+            height: 250px;
+            background: linear-gradient(45deg, #d4b896, #b8956e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+        }
+        .product-info {
+            padding: 25px;
+            text-align: center;
+        }
+        .product-info h3 {
+            font-family: 'Playfair Display', serif;
+            color: #5c3d2e;
+            font-size: 1.6rem;
+            margin: 0 0 10px;
+        }
+        .price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #c49a6c;
+            margin: 15px 0;
+        }
+        .price small {
+            font-size: 1rem;
+            color: #888;
+            text-decoration: line-through;
+        }
+        .buy-btn {
+            display: block;
+            width: 100%;
+            background: #6b4c3b;
+            color: #fff;
+            border: none;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .buy-btn:hover {
+            background: #c49a6c;
+            color: #2d1f16;
+        }
+
+        /* Phần giới thiệu lợi ích */
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+        .benefit-item {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-left: 5px solid #c49a6c;
+        }
+        .benefit-item .icon {
+            font-size: 3rem;
+        }
+
+        /* Form liên hệ đặt hàng */
+        .order-section {
+            background: linear-gradient(135deg, #5c3d2e, #3e2723);
+            color: #fff;
+            padding: 60px 20px;
+            border-radius: 30px;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+        .order-section h2 {
+            color: #ffd4a8;
+        }
+        .order-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: grid;
+            gap: 20px;
+        }
+        .order-form input, .order-form textarea, .order-form select {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid #c49a6c;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Quicksand', sans-serif;
+            background: #fff;
+            box-sizing: border-box;
+        }
+        .order-form button {
+            background: #ffd4a8;
+            color: #3e2723;
+            border: none;
+            padding: 18px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+        }
+        .order-form button:hover {
+            background: #fff;
+            box-shadow: 0 10px 25px rgba(255,255,255,0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: #2d1f16;
+            color: #ccc;
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+        }
+        footer a {
+            color: #c49a6c;
+            text-decoration: none;
+        }
+
+        /* Nút chat zalo cố định */
+        .zalo-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #0180c7;
+            color: white;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 65px;
+            font-size: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+            cursor: pointer;
+            z-index: 999;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+        .zalo-float:hover {
+            transform: scale(1.1);
+            background: #00a2ff;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Thanh điều hướng -->
+    <nav>
+        <div class="container">
+            <div class="logo">🥔 Khoai Môn Vàng</div>
+            <ul>
+                <li><a href="#home">Trang chủ</a></li>
+                <li><a href="#products">Sản phẩm</a></li>
+                <li><a href="#benefits">Lợi ích</a></li>
+                <li><a href="#order">Đặt hàng</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Phần hero -->
+    <section class="hero" id="home">
+        <h1>Khoai Môn Tây Nguyên</h1>
+        <p>Dẻo thơm - Bùi béo - Tươi ngon mỗi ngày</p>
+        <a href="#products" class="cta-btn">🛒 Mua Ngay</a>
+    </section>
+
+    <div class="container">
+
+        <!-- Danh sách sản phẩm -->
+        <h2 id="products">🌟 Sản Phẩm Của Chúng Tôi</h2>
+        <div class="product-grid">
+            <!-- Sản phẩm 1 -->
+            <div class="product-card">
+                <div class="product-img">🥔</div>
+                <div class="product-info">
+                    <h3>Khoai Môn Tươi</h3>
+                    <p>Khoai môn ruột tím, thu hoạch trong ngày, đảm bảo độ tươi ngon tuyệt đối.</p>
+                    <div class="price">
+                        <small>60.000đ</small> 45.000đ <span>/ kg</span>
+                    </div>
+                    <button class="buy-btn" onclick="addToCart('Khoai Môn Tươi', 45000)">Thêm vào giỏ</button>
+                </div>
+            </div>
+            <!-- Sản phẩm 2 -->
+            <div class="product-card">
+                <div class="product-img">🍠</div>
+                <div class="product-info">
+                    <h3>Khoai Môn Sấy</h3>
+                    <p>Khoai môn sấy giòn tan, tẩm vị bơ tỏi hoặc cay ngọt Hàn Quốc.</p>
+                    <div class="price">
+                        <small>120.000đ</small> 99.000đ <span>/ hộp 500g</span>
+                    </div>
+                    <button class="buy-btn" onclick="addToCart('Khoai Môn Sấy', 99000)">Thêm vào giỏ</button>
+                </div>
+            </div>
+            <!-- Sản phẩm 3 -->
+            <div class="product-card">
+                <div class="product-img">🥮</div>
+                <div class="product-info">
+                    <h3>Bánh Khoai Môn</h3>
+                    <p>Bánh khoai môn nhân thịt, há cảo chiên giòn, đông lạnh tiện lợi.</p>
+                    <div class="price">
+                        <small>150.000đ</small> 129.000đ <span>/ gói 20 cái</span>
+                    </div>
+                    <button class="buy-btn" onclick="addToCart('Bánh Khoai Môn', 129000)">Thêm vào giỏ</button>
+                </div>
+            </div>
+            <!-- Sản phẩm 4 -->
+            <div class="product-card">
+                <div class="product-img">🥛</div>
+                <div class="product-info">
+                    <h3>Trà Khoai Môn</h3>
+                    <p>Bột trà khoai môn nguyên chất, pha chế trà sữa thơm ngon tại nhà.</p>
+                    <div class="price">
+                        <small>85.000đ</small> 69.000đ <span>/ gói 300g</span>
+                    </div>
+                    <button class="buy-btn" onclick="addToCart('Trà Khoai Môn', 69000)">Thêm vào giỏ</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Giỏ hàng hiển thị đơn giản -->
+        <div style="background:#fff;padding:20px;border-radius:15px;margin-bottom:40px;box-shadow:0 5px 20px rgba(0,0,0,0.1);text-align:center;">
+            <h3 style="margin:0 0 15px;color:#5c3d2e;">🛒 Giỏ hàng của bạn</h3>
+            <ul id="cart-items" style="list-style:none;padding:0;text-align:left;max-height:200px;overflow-y:auto;"></ul>
+            <p style="font-weight:700;font-size:1.4rem;">Tổng: <span id="total-price" style="color:#c49a6c;">0</span>đ</p>
+            <button style="background:#c49a6c;color:#fff;border:none;padding:12px 35px;border-radius:25px;font-size:1.1rem;cursor:pointer;font-weight:700;" onclick="checkout()">Thanh toán</button>
+        </div>
+
+        <!-- Lợi ích của khoai môn -->
+        <h2 id="benefits">💪 Lợi Ích Tuyệt Vời</h2>
+        <div class="benefits">
+            <div class="benefit-item">
+                <div class="icon">🧠</div>
+                <h3>Tốt cho não bộ</h3>
+                <p>Giàu vitamin B6, kali giúp tăng cường trí nhớ và chức năng thần kinh.</p>
+            </div>
+            <div class="benefit-item">
+                <div class="icon">💖</div>
+                <h3>Tim mạch khỏe</h3>
+                <p>Chất xơ và kali hỗ trợ ổn định huyết áp, giảm cholesterol xấu.</p>
+            </div>
+            <div class="benefit-item">
+                <div class="icon">🦴</div>
+                <h3>Xương chắc khỏe</h3>
+                <p>Hàm lượng canxi và magie cao giúp xương dẻo dai, phòng loãng xương.</p>
+            </div>
+            <div class="benefit-item">
+                <div class="icon">✨</div>
+                <h3>Da đẹp dáng thon</h3>
+                <p>Chất chống oxy hóa và chất xơ giúp đẹp da, hỗ trợ giảm cân hiệu quả.</p>
+            </div>
+        </div>
+
+        <!-- Form đặt hàng -->
+        <div class="order-section" id="order">
+            <h2>📦 Đặt Hàng Nhanh</h2>
+            <p>Giao hàng miễn phí nội thành. Đảm bảo tươi ngon 100%.</p>
+            <form class="order-form" id="orderForm">
+                <input type="text" placeholder="Họ và tên *" required>
+                <input type="tel" placeholder="Số điện thoại *" required>
+                <input type="text" placeholder="Địa chỉ nhận hàng *" required>
+                <select required>
+                    <option value="">-- Chọn sản phẩm --</option>
+                    <option value="Khoai Môn Tươi">Khoai Môn Tươi - 45.000đ/kg</option>
+                    <option value="Khoai Môn Sấy">Khoai Môn Sấy - 99.000đ/hộp</option>
+                    <option value="Bánh Khoai Môn">Bánh Khoai Môn - 129.000đ/gói</option>
+                    <option value="Trà Khoai Môn">Trà Khoai Môn - 69.000đ/gói</option>
+                </select>
+                <input type="number" placeholder="Số lượng" min="1" value="1" required>
+                <textarea rows="3" placeholder="Ghi chú thêm..."></textarea>
+                <button type="submit">🚀 Đặt Hàng Ngay</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 Khoai Môn Vàng. Tất cả quyền được bảo lưu.</p>
+        <p>Liên hệ: <a href="tel:0909123456">0909.123.456</a> | Email: <a href="mailto:contact@khoaimonvang.vn">contact@khoaimonvang.vn</a></p>
+        <p>Địa chỉ: 123 Đường Khoai Lang, TP. Buôn Ma Thuột, Đắk Lắk</p>
+    </footer>
+
+    <!-- Nút chat Zalo -->
+    <a href="https://zalo.me/0909123456" target="_blank" class="zalo-float" title="Chat Zalo">💬</a>
+
+    <script>
+        // Biến lưu trữ giỏ hàng
+        let cart = [];
+        let total = 0;
+
+        // Hàm thêm sản phẩm vào giỏ
+        function addToCart(name, price) {
+            cart.push({ name: name, price: price });
+            total += price;
+            updateCartDisplay();
+            // Hiệu ứng rung nhẹ khi thêm
+            const btns = document.querySelectorAll('.buy-btn');
+            btns.forEach(b => b.style.transform = 'scale(0.95)');
+            setTimeout(() => {
+                btns.forEach(b => b.style.transform = 'scale(1)');
+            }, 100);
+        }
+
+        // Hàm cập nhật hiển thị giỏ hàng
+        function updateCartDisplay() {
+            const cartList = document.getElementById('cart-items');
+            const totalSpan = document.getElementById('total-price');
+            cartList.innerHTML = '';
+            cart.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.style.cssText = 'padding:8px 0;border-bottom:1px dashed #ddd;display:flex;justify-content:space-between;';
+                li.innerHTML = `${item.name} <span>${item.price.toLocaleString()}đ <button onclick="removeItem(${index})" style="background:red;color:#fff;border:none;border-radius:50%;width:25px;height:25px;cursor:pointer;margin-left:10px;">X</button></span>`;
+                cartList.appendChild(li);
+            });
+            totalSpan.textContent = total.toLocaleString();
+            if (cart.length === 0) {
+                cartList.innerHTML = '<li style="text-align:center;color:#999;">Giỏ hàng trống</li>';
+            }
+        }
+
+        // Hàm xóa sản phẩm khỏi giỏ
+        function removeItem(index) {
+            total -= cart[index].price;
+            cart.splice(index, 1);
+            updateCartDisplay();
+        }
+
+        // Hàm thanh toán
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Giỏ hàng đang trống! Vui lòng thêm sản phẩm.');
+                return;
+            }
+            let message = 'Đơn hàng của bạn:\n';
+            cart.forEach(item => {
+                message += `- ${item.name}: ${item.price.toLocaleString()}đ\n`;
+            });
+            message += `\nTổng cộng: ${total.toLocaleString()}đ`;
+            alert(message + '\n\nCảm ơn bạn đã mua hàng! Chúng tôi sẽ liên hệ sớm.');
+            // Reset giỏ hàng sau khi thanh toán
+            cart = [];
+            total = 0;
+            updateCartDisplay();
+        }
+
+        // Xử lý form đặt hàng
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            let orderInfo = 'ĐẶT HÀNG THÀNH CÔNG!\n\n';
+            for (let pair of formData.entries()) {
+                orderInfo += `${pair[0]}: ${pair[1]}\n`;
+            }
+            alert(orderInfo + '\nChúng tôi sẽ giao hàng trong 2-3 ngày. Cảm ơn quý khách!');
+            this.reset();
+        });
+
+        // Khởi tạo hiển thị giỏ hàng
+        updateCartDisplay();
+    </script>
+
+</body>
+</html>
