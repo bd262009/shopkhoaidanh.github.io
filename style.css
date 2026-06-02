@@ -1,0 +1,405 @@
+/* ============================================================
+   TÊN TẬP TIN: style.css
+   MÔ TẢ: Bảng định dạng bổ sung cho trang web Khoai Môn Vàng
+   PHIÊN BẢN: 2.0 - Bổ sung animation, responsive nâng cao,
+             hiệu ứng hover đặc biệt, dark mode, và preloader.
+   ============================================================ */
+
+/* ---------- 1. BIẾN CSS GỐC (CUSTOM PROPERTIES) ---------- */
+:root {
+    --primary-brown: #6b4c3b;
+    --golden: #c49a6c;
+    --light-cream: #f9f5f0;
+    --dark-bg: #1e1e1e;
+    --dark-card: #2a2a2a;
+    --dark-text: #cccccc;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Quicksand', sans-serif;
+    --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+    --shadow-card: 0 15px 35px rgba(0, 0, 0, 0.15);
+    --radius-lg: 25px;
+}
+
+/* ---------- 2. CSS RESET & FIXES CHUNG ---------- */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ---------- 3. THANH CUỘN TÙY CHỈNH ---------- */
+::-webkit-scrollbar {
+    width: 12px;
+}
+::-webkit-scrollbar-track {
+    background: #f1e3d3;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #c49a6c, #6b4c3b);
+    border-radius: 10px;
+    border: 2px solid #f1e3d3;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #d4a87c, #5c3d2e);
+}
+
+/* ---------- 4. HIỆU ỨNG XUẤT HIỆN KHI CUỘN ---------- */
+.fade-in {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ---------- 5. PRELOADER (MÀN HÌNH CHỜ) ---------- */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #f9f5f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+#preloader.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+.spinner {
+    width: 70px;
+    height: 70px;
+    border: 8px solid #e8d5c4;
+    border-top: 8px solid #6b4c3b;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ---------- 6. NAVIGATION NÂNG CAO ---------- */
+nav {
+    transition: background 0.4s ease, padding 0.4s ease;
+}
+nav.scrolled {
+    background: rgba(45, 31, 22, 0.97) !important;
+    padding: 8px 0;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+}
+nav .logo {
+    transition: transform 0.3s ease;
+}
+nav .logo:hover {
+    transform: scale(1.05) rotate(-2deg);
+}
+nav ul li a {
+    position: relative;
+    overflow: hidden;
+}
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: #ffd4a8;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+nav ul li a:hover::after {
+    width: 80%;
+}
+
+/* ---------- 7. NÚT CHUNG ---------- */
+.btn, .buy-btn, .cta-btn, .order-form button {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: var(--transition-smooth);
+}
+.btn::before, .buy-btn::before, .cta-btn::before, .order-form button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255,255,255,0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+    z-index: -1;
+}
+.btn:hover::before, .buy-btn:hover::before, .cta-btn:hover::before, .order-form button:hover::before {
+    width: 400px;
+    height: 400px;
+}
+
+/* ---------- 8. THẺ SẢN PHẨM ---------- */
+.product-card {
+    position: relative;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+}
+.product-card::after {
+    content: 'HOT';
+    position: absolute;
+    top: 15px;
+    right: -35px;
+    background: #e74c3c;
+    color: #fff;
+    padding: 8px 40px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    transform: rotate(45deg);
+    z-index: 5;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    letter-spacing: 1px;
+}
+.product-card:nth-child(even)::after {
+    content: 'MỚI';
+    background: #27ae60;
+}
+.product-card:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+}
+.product-img {
+    transition: transform 0.5s ease;
+}
+.product-card:hover .product-img {
+    transform: scale(1.08);
+}
+.buy-btn:active {
+    transform: scale(0.92);
+}
+
+/* ---------- 9. GIỎ HÀNG ---------- */
+#cart-items li {
+    animation: slideIn 0.3s ease forwards;
+}
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* ---------- 10. FORM ĐẶT HÀNG ---------- */
+.order-form input:focus,
+.order-form textarea:focus,
+.order-form select:focus {
+    outline: none;
+    border-color: #ffd4a8 !important;
+    box-shadow: 0 0 0 4px rgba(255, 212, 168, 0.4);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.order-form input::placeholder,
+.order-form textarea::placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+
+/* ---------- 11. NÚT ZALO NỔI ---------- */
+.zalo-float {
+    animation: pulse 2s infinite;
+}
+@keyframes pulse {
+    0% { box-shadow: 0 5px 20px rgba(0, 128, 199, 0.6); }
+    50% { box-shadow: 0 5px 40px rgba(0, 128, 199, 1), 0 0 0 15px rgba(0, 128, 199, 0.2); }
+    100% { box-shadow: 0 5px 20px rgba(0, 128, 199, 0.6); }
+}
+
+/* ---------- 12. LỢI ÍCH ---------- */
+.benefit-item {
+    transition: var(--transition-smooth);
+}
+.benefit-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    border-left-color: #6b4c3b;
+    background: #fffdf9;
+}
+.benefit-item .icon {
+    transition: transform 0.4s ease;
+}
+.benefit-item:hover .icon {
+    transform: rotateY(180deg);
+}
+
+/* ---------- 13. DARK MODE (TỰ ĐỘNG THEO HỆ THỐNG) ---------- */
+@media (prefers-color-scheme: dark) {
+    body.dark-mode-auto {
+        background-color: var(--dark-bg);
+        background-image: none;
+        color: var(--dark-text);
+    }
+    .dark-mode-auto .product-card,
+    .dark-mode-auto .benefit-item,
+    .dark-mode-auto #cart-items {
+        background: var(--dark-card);
+        color: #ddd;
+        border-color: #444;
+    }
+    .dark-mode-auto h1, 
+    .dark-mode-auto h2, 
+    .dark-mode-auto h3 {
+        color: #ffd4a8;
+    }
+    .dark-mode-auto .price {
+        color: #f0c27a;
+    }
+    .dark-mode-auto .order-section {
+        background: linear-gradient(135deg, #1a0f0a, #0d0704);
+    }
+    .dark-mode-auto nav {
+        background: #111 !important;
+    }
+    .dark-mode-auto footer {
+        background: #0a0a0a;
+    }
+    .dark-mode-auto input,
+    .dark-mode-auto textarea,
+    .dark-mode-auto select {
+        background: #333;
+        color: #fff;
+        border-color: #555;
+    }
+}
+
+/* ---------- 14. RESPONSIVE CHO ĐIỆN THOẠI ---------- */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+    .hero p {
+        font-size: 1rem;
+    }
+    .hero .cta-btn {
+        padding: 14px 30px;
+        font-size: 1rem;
+    }
+    nav ul {
+        gap: 10px;
+    }
+    nav a {
+        font-size: 0.8rem;
+        padding: 5px 8px;
+    }
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+    .benefits {
+        grid-template-columns: 1fr;
+    }
+    .zalo-float {
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        font-size: 1.5rem;
+        bottom: 20px;
+        right: 20px;
+    }
+}
+
+/* ---------- 15. HIỆU ỨNG TUYẾT RƠI (TÙY CHỌN) ---------- */
+.snowflake {
+    position: fixed;
+    top: -10px;
+    color: #fff;
+    font-size: 1.5rem;
+    animation: fall linear infinite;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.7;
+}
+@keyframes fall {
+    to { transform: translateY(110vh) rotate(720deg); }
+}
+
+/* ---------- 16. TOOLTIP ---------- */
+[data-tooltip] {
+    position: relative;
+}
+[data-tooltip]:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2d1f16;
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    z-index: 100;
+}
+
+/* ---------- 17. IN ĐẬM GIÁ KHUYẾN MÃI ---------- */
+.price small {
+    position: relative;
+}
+.price small::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #e74c3c;
+    transform: rotate(-10deg);
+}
+
+/* ---------- 18. HIỆU ỨNG NỀN ĐỘNG ---------- */
+.hero {
+    position: relative;
+    overflow: hidden;
+}
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+    animation: rotateBg 30s linear infinite;
+    z-index: 0;
+}
+@keyframes rotateBg {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.hero h1, .hero p, .hero a {
+    position: relative;
+    z-index: 1;
+}
